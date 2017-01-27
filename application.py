@@ -7,7 +7,7 @@ application.config.from_object('config')
 @application.route("/", methods=['GET', 'POST'])
 def home_page():
     """ The homepage """
-    return "hi y'all"
+    return "hi y'all!!"
 
 # run the app.
 if __name__ == "__main__":
