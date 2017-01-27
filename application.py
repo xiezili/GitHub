@@ -6,7 +6,7 @@ application = Flask(__name__)
 @application.route("/", methods=['GET', 'POST'])
 def home_page():
     """ The homepage """
-    return "hi sam"
+    return "hi y'all"
 
 # run the app.
 if __name__ == "__main__":
