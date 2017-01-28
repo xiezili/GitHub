@@ -14,7 +14,7 @@ application.config.from_object('config')
 def home_page():
     """ The homepage """
     users = mongo.db.users.find()
-    return "".join([result["name"] for result in users])
+    return "Users: " + "".join([result["name"] for result in users])
 
 # run the app.
 if __name__ == "__main__":
