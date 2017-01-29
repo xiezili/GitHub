@@ -3,17 +3,19 @@ application.py
 """
 
 from flask import Flask
-from flask.ext.pymongo import PyMongo
+from flask.ext.pymongo import MongoClient
 
-# EB looks for an 'application' callable by default.
+# EB looks for an "application" callable by default.
 application = Flask(__name__)
-mongo = PyMongo(application)
-application.config.from_object('config')
+client = MongoClient()
+db = client["application"]
 
-@application.route("/", methods=['GET', 'POST'])
+application.config.from_object("config")
+
+@application.route("/", methods=["GET", "POST"])
 def home_page():
     """ The homepage """
-    users = mongo.db.users.find()
+    users = db.users.find({})
     return "Users: " + "".join([result["name"] for result in users])
 
 # run the app.
