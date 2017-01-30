@@ -1,23 +1,20 @@
 """
 application.py
 """
-
+from Application.Services import Services
+from Business.AccessUsers import AccessUsers
 from flask import Flask
-from flask.ext.pymongo import MongoClient
 
-# EB looks for an "application" callable by default.
+# EB looks for an "application" callable by default
 application = Flask(__name__)
-client = MongoClient()
-db = client["application"]
-
 application.config.from_object("config")
+Services.create_data_access("application")
+access_users = AccessUsers()
 
 @application.route("/", methods=["GET", "POST"])
 def home_page():
     """ The homepage """
-    users = db.users.find({})
-    return "Users: " + "".join([result["name"] for result in users])
+    return "Users: " + access_users.get_users()
 
-# run the app.
 if __name__ == "__main__":
     application.run()
