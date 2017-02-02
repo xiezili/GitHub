@@ -11,11 +11,11 @@ class DataAccessObject(DataAccessInterface):
 
     def insert_user(self, userName):
         """Insert a user into the DB"""
-        pass
+        self.mongo.users.insert({"name":userName})
 
     def get_user(self, userName):
         """Grab a user from the DB"""
-        pass
+        return self.mongo.users.find({"name":userName})
 
     def get_all_users(self):
         """Return a list of all the users"""
