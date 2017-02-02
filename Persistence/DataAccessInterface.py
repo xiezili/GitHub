@@ -4,20 +4,20 @@ DataAccessInterface.py
 from abc import ABCMeta, abstractmethod
 
 class DataAccessInterface(object):
-    """DataAccess"""
+    """A Python abstract base class to act as an interface"""
     __metaclass__ = ABCMeta
 
     @abstractmethod
     def insert_user(self, userName):
-        """insert a user into the DB"""
+        """Insert a user into the DB"""
         pass
 
     @abstractmethod
     def get_user(self, userName):
-        """grab a user from the DB"""
+        """Grab a user from the DB"""
         pass
 
     @abstractmethod
     def get_all_users(self):
-        """return a list of all the users"""
+        """Return a list of all the users"""
         pass
