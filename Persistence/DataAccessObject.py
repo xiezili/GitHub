@@ -1,22 +1,27 @@
 """
 DataAccessObject.py
 """
+import random
 from Persistence.DataAccessInterface import DataAccessInterface
 from flask.ext.pymongo import MongoClient
 
 class DataAccessObject(DataAccessInterface):
     """For directly querying the MongoDB"""
     def __init__(self, name):
-        self.mongo = MongoClient()[name]
+        try:
+            self.mongo = MongoClient()[name]
+        except pymongo.errors.ConnectionFailure, e:
+            raise "Could not connect to MongoDB: {}".format(e)
 
-    def insert_user(self, userName):
-        """Insert a user into the DB"""
-        self.mongo.users.insert({"name":userName})
+    def get_question(self):
+        """Grab a question from the DB"""
+        rq_num = random.randint(0, self.get_num_questions()-1)
+        return [r for r in self.mongo.questions.find().limit(1).skip(rq_num)][0]
 
-    def get_user(self, userName):
-        """Grab a user from the DB"""
-        return self.mongo.users.find({"name":userName})
+    def get_questions(self):
+        """Return a list of all the questions"""
+        return [result for result in self.mongo.questions.find()]
 
-    def get_all_users(self):
-        """Return a list of all the users"""
-        return "".join([result["name"] for result in self.mongo.users.find({})])
+    def get_num_questions(self):
+        """Return the number of questions"""
+        return self.mongo.questions.count()

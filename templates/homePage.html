@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}
+<body>
+<h3>This is Trivia Smack</h3>
+
+<form method=post>
+
+{% if question %}
+    <p>{{ question }}</p>
+{% endif %}
+{% if options %}
+    {% for o in options %}
+        <label for=options class=optionButton>
+        ⚫ {{ o }}
+        </label>
+        {% if o == answer %}
+            <input id=options type=submit name="btn" value="correct"/>
+        {% else %}
+            <input id=options type=submit name="btn" value="wrong"/>            
+        {% endif %}
+        <br><br>
+    {% endfor %}
+{% endif %}
+
+</form>
+</body>
+
+{% endblock %}
+

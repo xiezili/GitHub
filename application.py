@@ -1,20 +1,37 @@
 """
 application.py
 """
+from flask import Flask, render_template, flash, request
 from Application.Services import Services
-from Business.AccessUsers import AccessUsers
-from flask import Flask
+from Business.AccessQuestions import AccessQuestions
+from flask.ext.wtf import Form
+from forms import QuestionForm
 
 # EB looks for an "application" callable by default
 application = Flask(__name__)
 application.config.from_object("config")
 Services.create_data_access("application")
-access_users = AccessUsers()
+access_questions = AccessQuestions()
 
 @application.route("/", methods=["GET", "POST"])
 def home_page():
     """ The homepage """
-    return "Users: " + access_users.get_users()
+    question_doc = access_questions.get_question()
+    answer = question_doc["answer"]
+
+    if request.method == "POST":
+        print request.form["btn"]
+
+    return render_template("homePage.html",\
+       question=question_doc["question"],\
+       options=question_doc["options"],\
+       answer=question_doc["options"][answer])
+
+@application.route("/wrong", methods=["GET", "POST"])
+def home_page_wrong():
+    """ Answer was wrong! """
+    flash("Wrong!")
+    return home_page()
 
 if __name__ == "__main__":
     application.run()

@@ -8,16 +8,16 @@ class DataAccessInterface(object):
     __metaclass__ = ABCMeta
 
     @abstractmethod
-    def insert_user(self, userName):
-        """Insert a user into the DB"""
+    def get_question(self):
+        """Grab a question from the DB"""
         pass
 
     @abstractmethod
-    def get_user(self, userName):
-        """Grab a user from the DB"""
+    def get_questions(self):
+        """Return a list of all the questions"""
         pass
 
     @abstractmethod
-    def get_all_users(self):
-        """Return a list of all the users"""
+    def get_num_questions(self):
+        """Return the number of questions"""
         pass
