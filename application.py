@@ -4,8 +4,6 @@ application.py
 from flask import Flask, render_template, flash, request
 from Application.Services import Services
 from Business.AccessQuestions import AccessQuestions
-from flask.ext.wtf import Form
-from forms import QuestionForm
 
 # EB looks for an "application" callable by default
 application = Flask(__name__)
@@ -26,12 +24,6 @@ def home_page():
        question=question_doc["question"],\
        options=question_doc["options"],\
        answer=question_doc["options"][answer])
-
-@application.route("/wrong", methods=["GET", "POST"])
-def home_page_wrong():
-    """ Answer was wrong! """
-    flash("Wrong!")
-    return home_page()
 
 if __name__ == "__main__":
     application.run()
