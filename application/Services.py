@@ -2,7 +2,7 @@
 Services.py
 """
 import sys
-from Persistence.DataAccessObject import DataAccessObject
+from persistence.DataAccessObject import DataAccessObject
 
 class Services(object):
     """Services"""
