@@ -24,8 +24,9 @@ class AccessQuestions(object):
 
             if _id not in seen:
                 seen.add(_id)
-                questions.append(self.data_access.get_question())
+                questions.append(question)
 
+        #ObjectID is not json serializable, so we must encode/decode the docs
         return [loads(dumps(doc, default=json_util.default)) for doc in questions]
 
     def get_all_questions(self):
