@@ -2,7 +2,7 @@
 DataAccessObject.py
 """
 import random
-from Persistence.DataAccessInterface import DataAccessInterface
+from persistence.DataAccessInterface import DataAccessInterface
 from flask.ext.pymongo import MongoClient
 
 class DataAccessObject(DataAccessInterface):
@@ -14,11 +14,11 @@ class DataAccessObject(DataAccessInterface):
             raise "Could not connect to MongoDB: {}".format(e)
 
     def get_question(self):
-        """Grab a question from the DB"""
+        """Grab a random question from the DB"""
         rq_num = random.randint(0, self.get_num_questions()-1)
         return [r for r in self.mongo.questions.find().limit(1).skip(rq_num)][0]
 
-    def get_questions(self):
+    def get_all_questions(self):
         """Return a list of all the questions"""
         return [result for result in self.mongo.questions.find()]
 
