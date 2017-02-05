@@ -9,22 +9,21 @@
 {% endif %}
 {% if options %}
     {% for o in options %}
-
-        <label class=optionButton>
-        ⚫ {{ o }}
         {% if o == answer %}
+            <label class="optionButton correct">
+            ⚫ {{ o }}
             <input type=submit name="btn" value="correct"/>
+            </label>
         {% else %}
+            <label class="optionButton wrong">
+            ⚫ {{ o }}
             <input type=submit name="btn" value="wrong"/>
+            </label>
         {% endif %}
-        </label>
-
         <br><br>
     {% endfor %}
 {% endif %}
-
 </form>
 </body>
-
 {% endblock %}
 
