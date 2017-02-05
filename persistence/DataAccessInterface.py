@@ -9,11 +9,11 @@ class DataAccessInterface(object):
 
     @abstractmethod
     def get_question(self):
-        """Grab a question from the DB"""
+        """Grab a random question from the DB"""
         pass
 
     @abstractmethod
-    def get_questions(self):
+    def get_all_questions(self):
         """Return a list of all the questions"""
         pass
 
