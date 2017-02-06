@@ -11,12 +11,12 @@
     {% for o in options %}
         {% if o == answer %}
             <label class="optionButton correct">
-            ⚫ {{ o }}
+            • {{ o }}
             <input type=submit name="btn" value="correct"/>
             </label>
         {% else %}
             <label class="optionButton wrong">
-            ⚫ {{ o }}
+            • {{ o }}
             <input type=submit name="btn" value="wrong"/>
             </label>
         {% endif %}
