@@ -1,27 +1,41 @@
 {% extends "base.html" %}
 {% block content %}
 
-<form method=post>
+<form id="questionForm" method="post">
 
 {% if question %}
     <p>{{ question }}</p>
 {% endif %}
 {% if options %}
     {% for o in options %}
-        {% if o == answer %}
-            <label class="optionButton correct">
-            • {{ o }}
-            <input type=submit name="btn" value="correct"/>
-            </label>
+
+        {% set id=loop.index %}
+
+        <label class="optionButton" id="{{id}}">
+        • {{o}}
+        {% if o==answer %}
+            <input onClick='show_result("RIGHT", {{id}}, "green")' name="btn" value="right"/>
         {% else %}
-            <label class="optionButton wrong">
-            • {{ o }}
-            <input type=submit name="btn" value="wrong"/>
-            </label>
+            <input onClick='show_result("WRONG", {{id}}, "red")' name="btn" value="wrong"/>
         {% endif %}
+        </label>
+
         <br><br>
     {% endfor %}
 {% endif %}
 </form>
-{% endblock %}
 
+<script>
+function show_result(result, id, color) {
+    var element = document.getElementById(id);
+    element.style.color = "white";
+    element.style.fontWeight = "bold";
+    element.style.background = color;
+    element.innerHTML = "• "+result+"!";
+    setTimeout(function(){
+        document.getElementById("questionForm").submit();
+    }, 80);
+}
+</script>
+
+{% endblock %}
