@@ -5,9 +5,9 @@ from flask import Flask, render_template, flash, request, session, redirect
 from application.Services import Services
 from business.AccessQuestions import AccessQuestions
 
-
 # EB looks for an "application" callable by default
 application = Flask(__name__)
+
 
 application.config.from_object("config")
 Services.create_data_access("application")
@@ -27,6 +27,7 @@ def home_page():
 @application.route("/question_page", methods=["GET", "POST"])
 def question_page():
     """The questions page"""
+
     q_count = session["question_count"]
 
     if q_count >= MAX_QUESTIONS:
@@ -38,9 +39,6 @@ def question_page():
     question = question_doc["question"]
     options = question_doc["options"]
     answer = options[question_doc["answer"]]
-
-    if request.method == "POST":
-        print request.form["btn"]
 
     return render_template("questionPage.html",\
        question=question,\
