@@ -1,8 +1,6 @@
 """
 AccessQuestions.py
 """
-from json import dumps, loads
-from bson import json_util
 from application.Services import Services
 
 class AccessQuestions(object):
@@ -20,14 +18,13 @@ class AccessQuestions(object):
 
         while len(seen) < set_size:
             question = self.data_access.get_question()
-            _id = question["_id"]
+            qid = question["question"] #we'll just use the question as the id
 
-            if _id not in seen:
-                seen.add(_id)
+            if qid not in seen:
+                seen.add(qid)
                 questions.append(question)
 
-        #ObjectID is not json serializable, so we must encode/decode the docs
-        return [loads(dumps(doc, default=json_util.default)) for doc in questions]
+        return [doc for doc in questions]
 
     def get_all_questions(self):
         """Grab all questions from the DB"""
