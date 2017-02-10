@@ -1,7 +1,7 @@
 """
 application.py
 """
-from flask import Flask, render_template, session, redirect
+from flask import Flask, render_template, request, session, redirect
 from application.Services import Services
 from business.AccessQuestions import AccessQuestions
 from flask.ext.session import Session
