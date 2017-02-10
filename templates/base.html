@@ -6,7 +6,9 @@
     {% if title %}
         <h2>{{title}}</h2>
     {% endif %}
+    <body>
     {% block content %}{% endblock %}
+    </body>
     <br>
     {% with messages = get_flashed_messages() %}
     {% if messages %}
