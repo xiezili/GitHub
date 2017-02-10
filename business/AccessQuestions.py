@@ -18,11 +18,12 @@ class AccessQuestions(object):
 
         while len(seen) < set_size:
             question = self.data_access.get_question()
-            qid = question["question"] #we'll just use the question as the id
 
-            if qid not in seen:
-                seen.add(qid)
-                questions.append(question)
+            if question is not None:
+                qid = question["question"]
+                if qid not in seen:
+                    seen.add(qid)
+                    questions.append(question)
 
         return [doc for doc in questions]
 

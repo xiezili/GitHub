@@ -23,14 +23,22 @@ class DataAccessObject(DataAccessInterface):
 
     def get_question(self):
         """Grab a random question from the DB"""
-        rq_num = random.randint(0, self.get_num_questions()-1)
-        doc = self.mongo.questions.find().limit(1).skip(rq_num)[0]
+        doc = None
+        num_qs = self.get_num_questions()
+        rq_num = random.randint(0, num_qs-1) if num_qs > 0 else 0
+        doc_cursor = self.mongo.questions.find().limit(1).skip(rq_num)
 
-        return DataAccessObject._serialize(doc)
+        if doc_cursor.count() > 0:
+            doc = DataAccessObject._serialize(doc_cursor[0])
+
+        return doc
 
     def get_all_questions(self):
         """Return a list of all the questions"""
-        return [result for result in self.mongo.questions.find()]
+        result = []
+        for doc in self.mongo.questions.find():
+            result.append(DataAccessObject._serialize(doc))
+        return result
 
     def get_num_questions(self):
         """Return the number of questions"""
