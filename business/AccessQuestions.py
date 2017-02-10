@@ -17,15 +17,15 @@ class AccessQuestions(object):
         seen = set()
 
         while len(seen) < set_size:
-            question = self.data_access.get_question()
+            question_obj = self.data_access.get_question()
 
-            if question is not None:
-                qid = question["question"]
+            if question_obj is not None:
+                qid = question_obj.question
                 if qid not in seen:
                     seen.add(qid)
-                    questions.append(question)
+                    questions.append(question_obj)
 
-        return [doc for doc in questions]
+        return questions
 
     def get_all_questions(self):
         """Grab all questions from the DB"""

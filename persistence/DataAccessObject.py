@@ -6,6 +6,7 @@ from json import dumps, loads
 from bson import json_util
 from persistence.DataAccessInterface import DataAccessInterface
 from flask.ext.pymongo import MongoClient
+from objects.Question import Question
 
 class DataAccessObject(DataAccessInterface):
     """For directly querying the MongoDB"""
@@ -21,6 +22,12 @@ class DataAccessObject(DataAccessInterface):
            so we must encode/decode documents"""
         return loads(dumps(doc, default=json_util.default))
 
+    @staticmethod
+    def clean(doc):
+        """Convert the unicode types to strings"""
+        doc["question"] = str(doc["question"])
+        doc["options"] = [str(o) for o in doc["options"]]
+
     def get_question(self):
         """Grab a random question from the DB"""
         doc = None
@@ -30,14 +37,20 @@ class DataAccessObject(DataAccessInterface):
 
         if doc_cursor.count() > 0:
             doc = DataAccessObject._serialize(doc_cursor[0])
+            DataAccessObject.clean(doc)
 
-        return doc
+        return Question(doc["question"], doc["options"], doc["answer"])
 
     def get_all_questions(self):
         """Return a list of all the questions"""
         result = []
+
         for doc in self.mongo.questions.find():
-            result.append(DataAccessObject._serialize(doc))
+            doc = DataAccessObject._serialize(doc)
+            DataAccessObject.clean(doc)
+            result.append\
+            (Question(doc["question"], doc["options"], doc["answer"]))
+
         return result
 
     def get_num_questions(self):
