@@ -1,23 +1,18 @@
 {% extends "base.html" %}
 {% block content %}
 
-<form id="questionForm" method="post">
+<form id="questionForm" method="">
 
 {% if question %}
     <p>{{ question }}</p>
 {% endif %}
 {% if options %}
     {% for o in options %}
-
         {% set id=loop.index %}
 
         <label class="optionButton" id="{{id}}">
         • {{o}}
-        {% if o==answer %}
-            <input onClick='show_result("RIGHT", {{id}}, "#4dc136")' name="btn" value="right"/>
-        {% else %}
-            <input onClick='show_result("WRONG", {{id}}, "#c13636")' name="btn" value="wrong"/>
-        {% endif %}
+        <input onClick=process_result({{id}}) id="btn" name="btn" value="">
         </label>
 
         <br><br>
@@ -26,16 +21,28 @@
 </form>
 
 <script>
-function show_result(result, id, color) {
+function process_result(id) {
+    var result = "Wrong";
+    var color = "#c13636";
+    var option = {{options|safe}}[id-1];
+    var answer = '{{answer|safe}}';
     var element = document.getElementById(id);
+    var qForm = document.getElementById("questionForm");
+    qForm.method = "GET";
+
+    if (option.toLowerCase().localeCompare(answer.toLowerCase()) == 0){
+        result = "Right";
+        color = "#4dc136";
+        document.getElementById("btn").value = "right";
+        qForm.method = "POST";
+    }
+
     element.style.color = "white";
     element.style.fontWeight = "bold";
     element.style.background = color;
     element.innerHTML = "• "+result+"!";
-    setTimeout(function(){
-        document.getElementById("questionForm").submit();
-    }, 80);
+
+    setTimeout(function(){ qForm.submit();}, 80);
 }
 </script>
-
 {% endblock %}
