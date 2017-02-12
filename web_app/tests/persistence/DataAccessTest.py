@@ -3,7 +3,7 @@ DataAccessTest.py
 """
 import unittest
 from DataAccessStub import DataAccessStub
-from server.application.Services import Services
+from web_app.application.Services import Services
 
 class DataAccessTest(unittest.TestCase):
 

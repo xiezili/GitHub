@@ -4,8 +4,8 @@ DataAccessStub.py
 import sys
 import random
 
-from server.persistence.DataAccessInterface import DataAccessInterface
-from server.objects.Question import Question
+from web_app.persistence.DataAccessInterface import DataAccessInterface
+from web_app.objects.Question import Question
 
 class DataAccessStub(DataAccessInterface):
     """Stub database"""
