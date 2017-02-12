@@ -2,8 +2,7 @@
 application.py
 """
 from flask import Flask
-from application.Services import Services
-from business.AccessQuestions import AccessQuestions
+from web_app.application.Services import Services
 from flask.ext.session import Session
 
 DB_NAME = "application"
@@ -14,7 +13,7 @@ application.config.from_object("config")
 Session(application)
 Services.create_data_access(DB_NAME)
 
-from views import home_page, question_page
+from web_app.views import home_page, question_page
 
 application.add_url_rule("/", view_func=home_page)
 application.add_url_rule\
