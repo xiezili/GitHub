@@ -9,9 +9,15 @@ class Services(object):
     dataAccessService = None
 
     @staticmethod
-    def create_data_access(dbName):
+    def create_data_access(dbName, alternateDataAccessService=None):
         """create_data_access"""
-        Services.dataAccessService = DataAccessObject(dbName)
+        if Services.dataAccessService is None:
+            if alternateDataAccessService:
+                Services.dataAccessService = alternateDataAccessService
+            else:
+                Services.dataAccessService = DataAccessObject(dbName)
+
+            Services.dataAccessService.open()
 
     @staticmethod
     def get_data_access():
@@ -21,3 +27,11 @@ class Services(object):
             sys.exit(0)
 
         return Services.dataAccessService
+
+    @staticmethod
+    def close_data_access():
+        """Close the database service"""
+        if Services.dataAccessService != None:
+            Services.dataAccessService.close()
+
+        Services.dataAccessService = None

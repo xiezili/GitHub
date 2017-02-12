@@ -2,6 +2,7 @@
 DataAccessObject.py
 """
 import random
+import pymongo
 from json import dumps, loads
 from bson import json_util
 from persistence.DataAccessInterface import DataAccessInterface
@@ -11,10 +12,22 @@ from objects.Question import Question
 class DataAccessObject(DataAccessInterface):
     """For directly querying the MongoDB"""
     def __init__(self, name):
+        self.db_name = name
+        self.mongo = None
+        self.client = None
+
+    def open(self):
+        """Opened the database"""
         try:
-            self.mongo = MongoClient()[name]
+            self.client = MongoClient()
+            self.mongo = self.client[self.db_name]
         except pymongo.errors.ConnectionFailure, e:
             raise "Could not connect to MongoDB: {}".format(e)
+
+    def close(self):
+        """Close the databse"""
+        print "Closed the database"
+        self.client.close()
 
     @staticmethod
     def _serialize(doc):

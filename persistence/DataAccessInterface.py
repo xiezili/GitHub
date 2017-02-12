@@ -8,6 +8,16 @@ class DataAccessInterface(object):
     __metaclass__ = ABCMeta
 
     @abstractmethod
+    def open(self):
+        """Opened the database"""
+        pass
+
+    @abstractmethod
+    def close(self):
+        """Closed the database"""
+        pass
+
+    @abstractmethod
     def get_question(self):
         """Grab a random question from the DB"""
         pass
