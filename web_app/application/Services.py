@@ -9,11 +9,11 @@ class Services(object):
     dataAccessService = None
 
     @staticmethod
-    def create_data_access(dbName, alternateDataAccessService=None):
+    def create_data_access(dbName=None, altDataAccessService=None):
         """create_data_access"""
         if Services.dataAccessService is None:
-            if alternateDataAccessService:
-                Services.dataAccessService = alternateDataAccessService
+            if altDataAccessService:
+                Services.dataAccessService = altDataAccessService
             else:
                 Services.dataAccessService = DataAccessObject(dbName)
 
