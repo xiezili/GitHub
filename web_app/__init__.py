@@ -1,6 +1,7 @@
 """
 __init__.py
 """
+
 DB_NAME = "application"
 
 def create_app(application):
@@ -10,3 +11,4 @@ def create_app(application):
 
     from .main import main as main_blueprint
     application.register_blueprint(main_blueprint)
+

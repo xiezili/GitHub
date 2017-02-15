@@ -13,6 +13,6 @@ application = Flask(__name__, template_folder="web_app/templates")
 create_app(application)
 Session(application)
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     application.run()
     Services.close_data_access()
