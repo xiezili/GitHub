@@ -2,13 +2,16 @@
 views.py
 """
 from flask import Flask, render_template, request, session, redirect
-from business.AccessQuestions import AccessQuestions
-access_questions = AccessQuestions()
+from web_app.business.AccessQuestions import AccessQuestions
+from . import main
 
 MAX_QUESTIONS = 3
 
+@main.route("/")
 def home_page():
     """The homepage"""
+    access_questions = AccessQuestions()
+
     score = session["score"] if "score" in session.keys() else None
 
     session.clear()
@@ -21,6 +24,7 @@ def home_page():
 
     return render_template("homePage.html", score=score)
 
+@main.route("/question_page", methods=["GET", "POST"])
 def question_page():
     """The questions page"""
     if request.method == "POST":
@@ -43,3 +47,4 @@ def question_page():
        question=question,\
        options=options,\
        answer=answer)
+
