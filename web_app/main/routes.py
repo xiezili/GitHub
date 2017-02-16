@@ -1,8 +1,9 @@
 """
 routes.py
 """
-from flask import Flask, render_template, request, session, redirect
+from flask import render_template, request, session, redirect, jsonify
 from web_app.business.AccessQuestions import AccessQuestions
+
 from . import main
 
 MAX_QUESTIONS = 3
@@ -48,3 +49,9 @@ def question_page():
        options=options,\
        answer=answer)
 
+@main.route("/api/android/question_data")
+def question_data():
+    """Returns questions to an android app client"""
+    access_questions = AccessQuestions()
+    questions = access_questions.get_random_questions(MAX_QUESTIONS)
+    return jsonify(result=questions)
