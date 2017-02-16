@@ -13,7 +13,10 @@ from web_app import create_app, DB_NAME
 Services.create_data_access(DB_NAME)
 
 # EB looks for an "application" callable by default
-application = Flask(__name__, template_folder="web_app/templates")
+application = Flask(__name__,\
+    template_folder="web_app/templates",\
+    static_folder="web_app/static")
+
 create_app(application)
 
 if __name__ == '__main__':
