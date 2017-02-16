@@ -31,12 +31,6 @@ class DataAccessObject(DataAccessInterface):
         self.client.close()
 
     @staticmethod
-    def _serialize(doc):
-        """Mongo ObjectIDs are not json serializable,
-           so we must encode/decode documents"""
-        return loads(dumps(doc, default=json_util.default))
-
-    @staticmethod
     def clean(doc):
         """Convert the unicode types to strings"""
         doc["question"] = str(doc["question"])
@@ -50,7 +44,7 @@ class DataAccessObject(DataAccessInterface):
         doc_cursor = self.mongo.questions.find().limit(1).skip(rq_num)
 
         if doc_cursor.count() > 0:
-            doc = DataAccessObject._serialize(doc_cursor[0])
+            doc = doc_cursor[0]
             DataAccessObject.clean(doc)
 
         return Question(doc["question"], doc["options"], doc["answer"])
@@ -60,7 +54,6 @@ class DataAccessObject(DataAccessInterface):
         result = []
 
         for doc in self.mongo.questions.find():
-            doc = DataAccessObject._serialize(doc)
             DataAccessObject.clean(doc)
             result.append\
             (Question(doc["question"], doc["options"], doc["answer"]))
