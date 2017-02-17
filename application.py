@@ -6,15 +6,12 @@ Note that EB looks for application.py in the root dir
 
 from flask import Flask
 from web_app.application.Services import Services
-from web_app import create_app, DB_NAME
+from web_app import create_app, set_up, tear_down
 
-Services.create_data_access(DB_NAME)
-
-# EB looks for an "application" callable by default
+set_up()
 application = Flask(__name__, template_folder="web_app/templates")
-
 create_app(application)
 
 if __name__ == "__main__":
     application.run()
-    Services.close_data_access()
+    tear_down()
