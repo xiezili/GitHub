@@ -1,48 +1,39 @@
 """
 routes.py
 """
-from flask import render_template, request, session, redirect, jsonify
+from flask import render_template, request, redirect, jsonify
 from web_app.business.AccessQuestions import AccessQuestions
-
+from web_app.business.GameController import GameController
 from . import main
 
 MAX_QUESTIONS = 3
+GAME_CONTROLLER = GameController(MAX_QUESTIONS)
 
 @main.route("/")
 def home_page():
     """The homepage"""
-    access_questions = AccessQuestions()
-
-    score = session["score"] if "score" in session.keys() else None
-
-    session.clear()
-    session["questions"] = access_questions.get_random_questions(MAX_QUESTIONS)
-    session["question_count"] = 0
-    session["score"] = 0
-
-    if session["questions"] == []:
-        raise Exception("No questions found!")
+    score = GAME_CONTROLLER.score
+    GAME_CONTROLLER.start()
 
     return render_template("homePage.html", score=score)
 
 @main.route("/question_page", methods=["GET", "POST"])
 def question_page():
     """The questions page"""
-    if request.method == "POST":
-        session["score"] += 1
 
-    q_count = session["question_count"]
+    result = request.args.get("result", None)
 
-    if q_count >= MAX_QUESTIONS:
+    if result is not None:
+        GAME_CONTROLLER.update_score(int(result))
+
+    question_obj = GAME_CONTROLLER.get_next_question()
+
+    if question_obj is None:
         return redirect("/")
-
-    question_obj = session["questions"][q_count]
-
-    session["question_count"] = q_count + 1
 
     question = question_obj.question
     options = question_obj.options
-    answer = options[question_obj.answer]
+    answer = question_obj.answer
 
     return render_template("questionPage.html",\
        question=question,\
@@ -54,4 +45,5 @@ def question_data():
     """Returns questions to an android app client"""
     access_questions = AccessQuestions()
     questions = access_questions.get_random_questions(MAX_QUESTIONS)
+
     return jsonify(result=questions)

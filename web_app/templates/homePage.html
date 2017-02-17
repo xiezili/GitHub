@@ -4,7 +4,7 @@
 <h3>This is Trivia Smack</h3>
 <a href="/question_page" class=optionButton>Start</a>
 <br><br>
-{% if score or score == 0 %}
+{% if score > -1 %}
     <p>Score: {{score}}</p>
 {% endif %}
 

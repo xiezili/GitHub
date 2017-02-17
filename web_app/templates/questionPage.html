@@ -1,48 +1,39 @@
 {% extends "base.html" %}
 {% block content %}
 
-<form id="questionForm" method="">
-
 {% if question %}
     <p>{{ question }}</p>
 {% endif %}
 {% if options %}
     {% for o in options %}
-        {% set id=loop.index %}
+        {% set id=loop.index-1 %}
 
-        <label class="optionButton" id="{{id}}">
+        <a class="optionButton" id="{{id}}"
+           href="{{ url_for('main.question_page', result=id) }}"
+           onClick=process_result({{id}})>
         • {{o}}
-        <input onClick=process_result({{id}}) id="btn" name="btn" value="">
-        </label>
+        </a>
 
         <br><br>
     {% endfor %}
 {% endif %}
-</form>
 
 <script>
 function process_result(id) {
     var result = "Wrong";
     var color = "#c13636";
-    var option = {{options|safe}}[id-1];
     var answer = '{{answer|safe}}';
     var element = document.getElementById(id);
-    var qForm = document.getElementById("questionForm");
-    qForm.method = "GET";
 
-    if (option.toLowerCase().localeCompare(answer.toLowerCase()) == 0){
+    if (id == answer){
         result = "Right";
         color = "#4dc136";
-        document.getElementById("btn").value = "right";
-        qForm.method = "POST";
     }
 
     element.style.color = "white";
     element.style.fontWeight = "bold";
     element.style.background = color;
     element.innerHTML = "• "+result+"!";
-
-    setTimeout(function(){ qForm.submit();}, 80);
 }
 </script>
 {% endblock %}
