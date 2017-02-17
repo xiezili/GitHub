@@ -11,7 +11,7 @@ Uses AWS Codepipeline for Continuous Integration. Code changes trigger deploymen
 
 Requirements: eb CLI (`pip install awsebcli`)
 
-To run:
+To run the server:
 - `clone https://github.com/samuel-peers/Trivia-Game.git`
 - `cd Trivia-Game`
 - `eb init -p python2.7 trivia_app`
