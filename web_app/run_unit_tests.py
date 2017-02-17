@@ -2,10 +2,8 @@
 run_unit_tests.py
 """
 import unittest
-
 from web_app.tests.objects.QuestionTest import QuestionTest
 from web_app.tests.persistence.DataAccessTest import DataAccessTest
-
 
 def main():
     """Grab all the test suites, run them"""
@@ -16,5 +14,5 @@ def main():
     runner = unittest.TextTestRunner()
     runner.run(all_suites)
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
