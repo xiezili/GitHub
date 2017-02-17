@@ -2,7 +2,6 @@
 __init__.py
 """
 from flask.json import JSONEncoder
-from flask.ext.session import Session
 from web_app.business.MyJSONEncoder import MyJSONEncoder
 from web_app.application.Services import Services
 
@@ -18,7 +17,6 @@ def create_app(application):
     from .main import main as main_blueprint
     application.register_blueprint(main_blueprint)
 
-    Session(application)
 
 def set_up():
     Services.create_data_access(DB_NAME)
