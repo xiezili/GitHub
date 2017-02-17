@@ -2,7 +2,7 @@
 DataAccessTest.py
 """
 import unittest
-from DataAccessStub import DataAccessStub
+from .DataAccessStub import DataAccessStub
 from web_app.application.Services import Services
 from web_app.objects.Question import Question
 

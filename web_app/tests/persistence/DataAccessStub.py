@@ -1,9 +1,7 @@
 """
 DataAccessStub.py
 """
-import sys
 import random
-
 from web_app.persistence.DataAccessInterface import DataAccessInterface
 from web_app.objects.Question import Question
 
