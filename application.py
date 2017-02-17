@@ -3,13 +3,15 @@ application.py
 
 Note that EB looks for application.py in the root dir
 """
-
 from flask import Flask
-from web_app.application.Services import Services
 from web_app import create_app, set_up, tear_down
 
 set_up()
-application = Flask(__name__, template_folder="web_app/templates")
+
+application = Flask(__name__,\
+    template_folder="web_app/templates",\
+    static_folder="web_app/static")
+
 create_app(application)
 
 if __name__ == "__main__":
