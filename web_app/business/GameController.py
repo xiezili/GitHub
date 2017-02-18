@@ -36,3 +36,6 @@ class GameController(object):
         """Update score if the current question answer equals answer_index"""
         if answer_index == self.curr_question.answer:
             self.score += 1
+
+    def is_finished(self):
+        return self.max_questions == self.question_count

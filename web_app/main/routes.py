@@ -21,15 +21,15 @@ def home_page():
 def question_page():
     """The questions page"""
 
+    if GAME_CONTROLLER.is_finished():
+        return redirect("/")
+
     result = request.args.get("result", None)
 
     if result is not None:
         GAME_CONTROLLER.update_score(int(result))
 
     question_obj = GAME_CONTROLLER.get_next_question()
-
-    if question_obj is None:
-        return redirect("/")
 
     question = question_obj.question
     options = question_obj.options
