@@ -8,7 +8,7 @@
     {% for o in options %}
         {% set id=loop.index-1 %}
 
-        <a class="optionButton" id="{{id}}"
+        <a class="button option" id="{{id}}"
            href="{{ url_for('main.question_page', result=id) }}"
            onClick=process_result({{id}})>
         • {{o}}
