@@ -8,10 +8,26 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="comp4350.triviasmack.MainActivity">
+    tools:context="comp4350.triviasmack.presentation.MainActivity">
+
+    <Button
+        android:text="PLAY!"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/playButton"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:onClick="renderQuestionPage" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!" />
+        android:text="TRIVIA SMACK!"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        android:textColor="#5A5A5A"
+        android:layout_marginBottom="12dp"
+        android:layout_above="@+id/playButton"
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>
