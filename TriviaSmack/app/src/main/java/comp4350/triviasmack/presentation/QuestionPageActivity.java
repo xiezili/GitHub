@@ -21,7 +21,7 @@ public class QuestionPageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_question_page);
         Intent intent = getIntent();
-        gameController = (GameController)intent.getSerializableExtra("gameController");
+        gameController = GameController.getInstance();
         Question questionObj = gameController.getNextQuestion();
 
         TextView questionTitle = (TextView)findViewById(R.id.questionText);
@@ -42,8 +42,21 @@ public class QuestionPageActivity extends AppCompatActivity {
     }
 
     public void processOptionButton(View v) {
+        boolean result;
+        String optionText;
 
-        ((Button)v).setText("• RIGHT!");
+        optionText = ((Button)v).getText()+"";
+        optionText = optionText.substring(2);
+        result = gameController.evaluateAnswer(optionText);
+
+        if (result) {
+            ((Button) v).setText("• RIGHT!");
+            gameController.increaseScore();
+        }
+        else{
+            ((Button) v).setText("• WRONG!");
+        }
+
         if (gameController.finished()){
             Intent MainPageIntent = new Intent(QuestionPageActivity.this, MainActivity.class);
             QuestionPageActivity.this.startActivity(MainPageIntent);

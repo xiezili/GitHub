@@ -1,23 +1,29 @@
 package comp4350.triviasmack.business;
 
-import java.io.Serializable;
-
 import comp4350.triviasmack.objects.Question;
 
-public class GameController implements Serializable {
+public class GameController {
 
-    private int maxQuestions;
+    private static GameController instance = null;
+    private final static int maxQuestions = 2;
+
     private Question questions[];
     private int questionCount;
     private Question currQuestion;
     private int score;
 
-    public GameController(int maxQuestions){
-        this.maxQuestions = maxQuestions;
+    protected GameController(){
         questions = null;
         questionCount = -1;
         currQuestion = null;
         score = -1;
+    }
+
+    public static GameController getInstance() {
+        if(instance == null) {
+            instance = new GameController();
+        }
+        return instance;
     }
 
     private Question[] getQuestions(){
@@ -49,11 +55,20 @@ public class GameController implements Serializable {
         return currQuestion;
     }
 
-    public void updateScore(int answerIndex){
-        if (answerIndex == currQuestion.answer){
-            score++;
+    public boolean evaluateAnswer(String playersAnswer){
+        String answer;
+        boolean result;
+
+        result = false;
+        answer = currQuestion.options[currQuestion.answer];
+
+        if (playersAnswer.equalsIgnoreCase(answer)){
+            result = true;
         }
+        return result;
     }
+
+    public void increaseScore(){ instance.score++; }
 
     public boolean finished(){
         return maxQuestions == questionCount;

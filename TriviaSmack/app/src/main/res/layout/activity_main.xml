@@ -30,4 +30,16 @@
         android:layout_marginBottom="12dp"
         android:layout_above="@+id/playButton"
         android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Score: "
+        android:id="@+id/scoreText"
+        android:visibility="invisible"
+        android:textSize="20sp"
+        android:textColor="#5A5A5A"
+        android:layout_marginBottom="12dp"
+        android:layout_below="@+id/playButton"
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>
