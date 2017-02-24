@@ -1,5 +1,8 @@
 package comp4350.triviasmack.business;
 
+import java.util.ArrayList;
+
+import comp4350.triviasmack.application.Services;
 import comp4350.triviasmack.objects.Question;
 
 public class GameController {
@@ -7,16 +10,19 @@ public class GameController {
     private static GameController instance = null;
     private final static int maxQuestions = 2;
 
-    private Question questions[];
+    private ArrayList<Question> questions;
     private int questionCount;
     private Question currQuestion;
     private int score;
+    private boolean started;
+    private ServerAccess serverAccess;
 
     protected GameController(){
         questions = null;
         questionCount = -1;
         currQuestion = null;
         score = -1;
+        serverAccess = Services.getServerAccess();
     }
 
     public static GameController getInstance() {
@@ -26,13 +32,8 @@ public class GameController {
         return instance;
     }
 
-    private Question[] getQuestions(){
-        Question result[] = new Question[2];
-        String optionsA[] = {"3", "0", "4"};
-        result[0] = new Question("What is 2+2?", optionsA, 2);
-        String optionsB[] = {"Sweden", "Russia"};
-        result[1] = new Question("Moscow is the capitol of:", optionsB, 1);
-        return result;
+    private ArrayList<Question> getQuestions(){
+        return serverAccess.getRandomQuestions();
     }
 
     public int getScore(){ return score; }
@@ -41,6 +42,7 @@ public class GameController {
         questionCount = 0;
         score = 0;
         questions = getQuestions();
+        started = true;
     }
 
     public Question getNextQuestion(){
@@ -48,7 +50,7 @@ public class GameController {
             currQuestion = null;
         }
         else {
-            currQuestion = questions[questionCount];
+            currQuestion = questions.get(questionCount);
             questionCount++;
         }
 
@@ -56,11 +58,8 @@ public class GameController {
     }
 
     public boolean evaluateAnswer(String playersAnswer){
-        String answer;
-        boolean result;
-
-        result = false;
-        answer = currQuestion.options[currQuestion.answer];
+        boolean result = false;
+        String answer = currQuestion.options[currQuestion.answer];
 
         if (playersAnswer.equalsIgnoreCase(answer)){
             result = true;
@@ -68,9 +67,13 @@ public class GameController {
         return result;
     }
 
-    public void increaseScore(){ instance.score++; }
+    public void increaseScore(){ score++; }
+
+    public boolean isStarted(){ return started; }
 
     public boolean finished(){
         return maxQuestions == questionCount;
     }
+
+    public static void destroy(){ instance = null; }
 }

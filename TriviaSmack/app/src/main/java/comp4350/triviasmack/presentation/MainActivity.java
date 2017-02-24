@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import comp4350.triviasmack.R;
+import comp4350.triviasmack.application.Main;
 import comp4350.triviasmack.business.GameController;
 
 public class MainActivity extends AppCompatActivity {
@@ -16,15 +17,17 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Main.startUp();
+        gameController = GameController.getInstance();
         setContentView(R.layout.activity_main);
         displayScore();
-        gameController = GameController.getInstance();
         gameController.start();
     }
 
     private void displayScore(){
-        int score = GameController.getInstance().getScore();
-        if (score >= 0){
+        int score = gameController.getScore();
+
+        if (GameController.getInstance().isStarted()){
             TextView scoreText = (TextView)findViewById(R.id.scoreText);
             scoreText.setVisibility(View.VISIBLE);
             scoreText.setText(scoreText.getText()+""+score);
