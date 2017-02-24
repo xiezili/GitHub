@@ -13,20 +13,18 @@ import comp4350.triviasmack.objects.Question;
 
 public class QuestionPageActivity extends AppCompatActivity {
 
-    private GameController gameController;
+    private GameController gameController = GameController.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_question_page);
-        Intent intent = getIntent();
-        gameController = GameController.getInstance();
+
         Question questionObj = gameController.getNextQuestion();
-
         TextView questionTitle = (TextView)findViewById(R.id.questionText);
-        questionTitle.setText(questionObj.question);
 
+        questionTitle.setText(questionObj.question);
         showOptions(questionObj.options);
     }
 
