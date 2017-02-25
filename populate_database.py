@@ -1,11 +1,13 @@
+"""
+populate_database.py
+"""
 from pymongo import MongoClient
 
-
-def fill_db():
+def populate_db():
+    """Fill the mongoDB with questions"""
     client = MongoClient()
     client.drop_database("application")
     db = client["application"]
-    # collection = db['questions']
 
     question_list = [
         {"question": "How much does a male Polar Bear weigh?",
@@ -28,7 +30,7 @@ def fill_db():
          "options": ["positive", "negative", "Not determinable"],
          "answer": 2},
         {"question": "The plural of bison is:",
-         "options": ["bisii", "buffalo", "bison", "buffalos"],
+         "options": ["bisons", "buffalo", "bison", "buffalos"],
          "answer": 2},
         {"question": "21, 25, 33, 49, 81, ",
          "options": ["162", "113", "144", "145"],

@@ -1,9 +1,8 @@
 """
 __init__.py
 """
-
-from populate_database import fill_db
 from flask.json import JSONEncoder
+from populate_database import populate_db
 from web_app.business.MyJSONEncoder import MyJSONEncoder
 from web_app.application.Services import Services
 from web_app.tests.persistence.DataAccessStub import DataAccessStub
@@ -24,7 +23,7 @@ def create_app(application):
 
 
 def set_up():
-    fill_db()
+    populate_db()
     Services.create_data_access(dbName="application")
 
 
