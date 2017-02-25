@@ -28,8 +28,8 @@ public class FetchQuestions extends AsyncTask<String, Void, String[]>{
     public static void destroy(){ instance = null; }
 
     protected String[] doInBackground(String... params) {
+        final String BASE_URL = "http://triviasmack.safjbugccz.us-west-2.elasticbeanstalk.com/api/android/question_data";
 
-        final String BASE_URL = "triviasmack.safjbugccz.us-west-2.elasticbeanstalk.com/api/android/question_data";
         String jsonQuestion = null;
         HttpURLConnection urlConnection = null;
         BufferedReader reader = null;
