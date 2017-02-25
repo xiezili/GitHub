@@ -48,6 +48,8 @@ public class FetchQuestionTests extends TestCase {
         assertEquals(q.getAnswer(), 2);
         for (int i = 0; i < q.getOptions().length; i++)
             assertEquals(testArray[i], q.getOptions()[i]);
+
+        System.out.println("Finished FetchQuestion: ParseQuestion");
     }
 
     public void testWrongValue(){
@@ -72,5 +74,7 @@ public class FetchQuestionTests extends TestCase {
         {
         }
         assertTrue(fail);
+
+        System.out.println("Finished FetchQuestion: ErrorHandling");
     }
 }
