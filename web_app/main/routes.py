@@ -6,8 +6,7 @@ from web_app.business.AccessQuestions import AccessQuestions
 from web_app.business.GameController import GameController
 from . import main
 
-MAX_QUESTIONS = 3
-GAME_CONTROLLER = GameController.get_instance(MAX_QUESTIONS)
+GAME_CONTROLLER = GameController.get_instance()
 
 @main.route("/")
 def home_page():
@@ -40,10 +39,10 @@ def question_page():
        options=options,\
        answer=answer)
 
-@main.route("/api/android/question_data/<max_questionss>")
-def question_data(max_questionss):
+@main.route("/api/android/question_data/<num_questions>")
+def question_data(num_questions):
     """Returns questions to an android app client"""
     access_questions = AccessQuestions()
-    questions = access_questions.get_random_questions(int(max_questionss))
+    questions = access_questions.get_random_questions(int(num_questions))
 
     return jsonify(result=questions)
