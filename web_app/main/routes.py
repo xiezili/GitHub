@@ -7,12 +7,12 @@ from web_app.business.GameController import GameController
 from . import main
 
 MAX_QUESTIONS = 3
-GAME_CONTROLLER = GameController(MAX_QUESTIONS)
+GAME_CONTROLLER = GameController.get_instance(MAX_QUESTIONS)
 
 @main.route("/")
 def home_page():
     """The homepage"""
-    score = GAME_CONTROLLER.score
+    score = GAME_CONTROLLER.score if GAME_CONTROLLER.is_started else None
     GAME_CONTROLLER.start()
 
     return render_template("homePage.html", score=score)
@@ -22,7 +22,7 @@ def question_page():
     """The questions page"""
 
     result = request.args.get("result", None)
-    
+
     if result is not None:
         GAME_CONTROLLER.update_score(int(result))
 
