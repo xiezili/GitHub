@@ -11,14 +11,12 @@ class DataAccessTest(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        """Call once"""
         Services.close_data_access()
         Services.create_data_access(\
             altDataAccessService=DataAccessStub("application"))
 
     @classmethod
     def tearDownClass(cls):
-        """Call once"""
         Services.close_data_access()
 
     def setUp(self):
@@ -29,7 +27,6 @@ class DataAccessTest(unittest.TestCase):
         self.data_access = None
 
     def test_get_question(self):
-        """Test the get_question method"""
         print "Testing DataAccess: get_question"
 
         question_obj = self.data_access.get_question()
@@ -38,7 +35,6 @@ class DataAccessTest(unittest.TestCase):
         self.assertIsNotNone(question_obj)
 
     def test_get_all_questions(self):
-        """Test the get_all_questions method"""
         print "Testing DataAccess: get_all_questions"
 
         all_questions = self.data_access.get_all_questions()
@@ -49,7 +45,6 @@ class DataAccessTest(unittest.TestCase):
                           "How much does a male Polar Bear weigh?")
 
     def test_get_num_questions(self):
-        """Test the get_num_question method"""
         print "Testing DataAccess: get_num_questions"
 
         num_questions = self.data_access.get_num_questions()

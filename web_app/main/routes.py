@@ -10,7 +10,6 @@ GAME_CONTROLLER = GameController.get_instance()
 
 @main.route("/")
 def home_page():
-    """The homepage"""
     score = GAME_CONTROLLER.score if GAME_CONTROLLER.is_started else None
     GAME_CONTROLLER.start()
 
@@ -18,7 +17,6 @@ def home_page():
 
 @main.route("/question_page", methods=["GET", "POST"])
 def question_page():
-    """The questions page"""
 
     result = request.args.get("result", None)
 
@@ -41,7 +39,6 @@ def question_page():
 
 @main.route("/api/android/question_data/<num_questions>")
 def question_data(num_questions):
-    """Returns questions to an android app client"""
     access_questions = AccessQuestions()
     questions = access_questions.get_random_questions(int(num_questions))
 

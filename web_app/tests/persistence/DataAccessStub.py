@@ -13,8 +13,9 @@ class DataAccessStub(DataAccessInterface):
         self.questions = []
 
     def open(self):
-        """Open the database"""
+
         print "Opened database"
+
         self.questions.append(Question("How much does a male Polar Bear weigh?",\
                                       ["1200 lbs", "1000 lbs", "600 lbs",\
                                       "Enough to break the ice"], 1))
@@ -42,20 +43,16 @@ class DataAccessStub(DataAccessInterface):
 
 
     def close(self):
-        """Close the database"""
         print "Closed database"
         self.questions = None
 
     def get_question(self):
-        """Grab a random question from the DB"""
         num_qs = self.get_num_questions()
         rq_num = random.randint(0, num_qs-1) if num_qs > 0 else 0
         return self.questions[rq_num]
 
     def get_all_questions(self):
-        """Return a list of all the questions"""
         return self.questions
 
     def get_num_questions(self):
-        """Return the number of questions"""
         return len(self.questions)
