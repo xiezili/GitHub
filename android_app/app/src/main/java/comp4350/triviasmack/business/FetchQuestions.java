@@ -3,6 +3,9 @@ package comp4350.triviasmack.business;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -10,7 +13,19 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import comp4350.triviasmack.objects.Question;
+
 public class FetchQuestions extends AsyncTask<String, Void, String[]>{
+    private static FetchQuestions instance = null;
+
+    public static FetchQuestions getInstance() {
+        if(instance == null) {
+            instance = new FetchQuestions();
+        }
+        return instance;
+    }
+
+    public static void destroy(){ instance = null; }
 
     protected String[] doInBackground(String... params) {
 
@@ -43,6 +58,8 @@ public class FetchQuestions extends AsyncTask<String, Void, String[]>{
             jsonQuestion = buffer.toString();
             Log.v("Testing output", jsonQuestion);
 
+
+
         } catch (Exception e) {
             System.out.println("Exception");
 
@@ -65,5 +82,35 @@ public class FetchQuestions extends AsyncTask<String, Void, String[]>{
     protected void onPostExecute(String[] strings) {
         super.onPostExecute(strings);
 
+    }
+
+    public Question parseQuestion(String jsonQuestion)
+    {
+        Question q = null;
+        JSONObject jsonObject = null;
+        String question = "";
+        String[] options;
+        int answer;
+
+        try {
+            jsonObject = new JSONObject(jsonQuestion);
+
+            question = jsonObject.getString("question");
+
+            JSONArray array = jsonObject.getJSONArray("options");
+            options = new String[array.length()];
+            for(int i = 0; i < options.length; i++)
+                options[i] = array.get(i).toString();
+
+            answer = jsonObject.getInt("answer");
+
+            q = new Question(question, options, answer);
+        }
+        catch(Exception e) {
+            System.out.println("HERE FAIL");
+            e.printStackTrace();
+        }
+
+        return q;
     }
 }

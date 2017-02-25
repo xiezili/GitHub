@@ -28,21 +28,21 @@ public class GameControllerTest extends TestCase {
     }
 
     public void testSingleton(){
-        System.out.println("Testing GameController: Singleton");
+        System.out.println("\nTesting GameController: Singleton");
         GameController first = GameController.getInstance();
         GameController second = GameController.getInstance();
         assertEquals(first, second);
     }
 
     public void testStart(){
-        System.out.println("Testing GameController: Start");
+        System.out.println("\nTesting GameController: Start");
         assertFalse(dummyGameController.isStarted());
         dummyGameController.start();
         assertTrue(dummyGameController.isStarted());
     }
 
     public void testIncreaseScore(){
-        System.out.println("Testing GameController: IncreaseScore");
+        System.out.println("\nTesting GameController: IncreaseScore");
         dummyGameController.start();
         assertEquals(0, dummyGameController.getScore());
         dummyGameController.increaseScore();
@@ -50,7 +50,7 @@ public class GameControllerTest extends TestCase {
     }
 
     public void testGetQuestion(){
-        System.out.println("Testing GameController: GetQuestion");
+        System.out.println("\nTesting GameController: GetQuestion");
         dummyGameController.start();
     }
 }
