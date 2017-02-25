@@ -2,7 +2,7 @@
 __init__.py
 """
 from flask.json import JSONEncoder
-from populate_database import populate_db
+from web_app.populate_database import populate_db
 from web_app.business.MyJSONEncoder import MyJSONEncoder
 from web_app.application.Services import Services
 from web_app.tests.persistence.DataAccessStub import DataAccessStub
