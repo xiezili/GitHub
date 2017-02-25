@@ -59,7 +59,7 @@ public class GameController {
 
     public boolean evaluateAnswer(String playersAnswer){
         boolean result = false;
-        String answer = currQuestion.options[currQuestion.answer];
+        String answer = currQuestion.getOptions()[currQuestion.getAnswer()];
 
         if (playersAnswer.equalsIgnoreCase(answer)){
             result = true;
