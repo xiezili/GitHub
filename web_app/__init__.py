@@ -10,7 +10,6 @@ from web_app.persistence.DataAccessObject import DataAccessObject
 
 DB_NAME = "application"
 
-
 def create_app(application):
     """Create the application"""
 
@@ -23,9 +22,8 @@ def create_app(application):
 
 
 def set_up():
-    populate_db()
-    Services.create_data_access(dbName="application")
-
+    populate_db(DB_NAME)
+    Services.create_data_access(dbName=DB_NAME)
 
 def tear_down():
     Services.close_data_access()
