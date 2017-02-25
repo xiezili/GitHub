@@ -1,6 +1,7 @@
 package comp4350.triviasmack.business;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import comp4350.triviasmack.objects.Question;
 
@@ -9,5 +10,5 @@ public interface ServerAccess {
 
     void close();
 
-    ArrayList<Question> getRandomQuestions();
+    ArrayList<Question> getRandomQuestions(int numQuestions);
 }
