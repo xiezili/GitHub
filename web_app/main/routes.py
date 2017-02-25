@@ -23,8 +23,8 @@ def question_page():
 
     result = request.args.get("result", None)
 
-    if result is not None:
-        GAME_CONTROLLER.update_score(int(result))
+    if result and GAME_CONTROLLER.evaluate_answer(int(result)):
+        GAME_CONTROLLER.increase_score()
 
     if GAME_CONTROLLER.is_finished():
         return redirect("/")

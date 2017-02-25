@@ -49,10 +49,13 @@ class GameController(object):
 
         return self.curr_question
 
-    def update_score(self, answer_index):
-        """Update score if the current question answer equals answer_index"""
-        if answer_index == self.curr_question.answer:
-            self.score += 1
+    def increase_score(self):
+        self.score += 1
+
+    def evaluate_answer(self, answer_index):
+        """Check if the current question answer equals answer_index"""
+        result = True if answer_index == self.curr_question.answer else False
+        return result
 
     def is_finished(self):
         """Check if the game is finished"""
