@@ -107,7 +107,6 @@ public class FetchQuestions extends AsyncTask<String, Void, String[]>{
             q = new Question(question, options, answer);
         }
         catch(Exception e) {
-            System.out.println("HERE FAIL");
             e.printStackTrace();
         }
 
