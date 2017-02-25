@@ -24,8 +24,8 @@ public class QuestionPageActivity extends AppCompatActivity {
         Question questionObj = gameController.getNextQuestion();
         TextView questionTitle = (TextView)findViewById(R.id.questionText);
 
-        questionTitle.setText(questionObj.question);
-        showOptions(questionObj.options);
+        questionTitle.setText(questionObj.getQuestion());
+        showOptions(questionObj.getOptions());
     }
 
     public void showOptions(String options[]) {

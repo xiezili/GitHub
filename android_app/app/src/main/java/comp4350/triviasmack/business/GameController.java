@@ -8,7 +8,7 @@ import comp4350.triviasmack.objects.Question;
 public class GameController {
 
     private static GameController instance = null;
-    private final static int maxQuestions = 2;
+    private final static int maxQuestions = 3;
 
     private ArrayList<Question> questions;
     private int questionCount;
@@ -33,7 +33,7 @@ public class GameController {
     }
 
     private ArrayList<Question> getQuestions(){
-        return serverAccess.getRandomQuestions();
+        return serverAccess.getRandomQuestions(maxQuestions);
     }
 
     public int getScore(){ return score; }
@@ -59,7 +59,7 @@ public class GameController {
 
     public boolean evaluateAnswer(String playersAnswer){
         boolean result = false;
-        String answer = currQuestion.options[currQuestion.answer];
+        String answer = currQuestion.getOptions()[currQuestion.getAnswer()];
 
         if (playersAnswer.equalsIgnoreCase(answer)){
             result = true;
