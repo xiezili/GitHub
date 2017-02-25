@@ -25,7 +25,7 @@ def create_app(application):
 
 def set_up():
     fill_db()
-    Services.create_data_access()
+    Services.create_data_access(dbName="application")
 
 
 def tear_down():
