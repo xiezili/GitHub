@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import comp4350.triviasmack.R;
 import comp4350.triviasmack.application.Main;
+import comp4350.triviasmack.business.FetchQuestions;
 import comp4350.triviasmack.business.GameController;
 
 public class MainActivity extends AppCompatActivity {
@@ -22,6 +23,18 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         displayScore();
         gameController.start();
+    }
+
+    @Override
+    public void onStart(){
+        System.out.println("dfd");
+        super.onStart();
+        updateQuestions();
+    }
+
+    public void updateQuestions(){
+        FetchQuestions fetch = new FetchQuestions();
+        fetch.execute();
     }
 
     private void displayScore(){
