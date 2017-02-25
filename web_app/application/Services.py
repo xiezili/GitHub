@@ -6,7 +6,7 @@ from web_app.persistence.DataAccessObject import DataAccessObject
 
 class Services(object):
     """Services"""
-    dataAccessService = None
+    dataAccessService = DataAccessObject("application")
 
     @staticmethod
     def create_data_access(dbName=None, altDataAccessService=None):
