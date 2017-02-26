@@ -24,7 +24,6 @@ public class MainActivity extends AppCompatActivity {
         gameController.start();
     }
 
-
     private void displayScore(){
         int score = gameController.getScore();
 

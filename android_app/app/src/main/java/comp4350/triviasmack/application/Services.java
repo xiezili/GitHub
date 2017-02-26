@@ -1,7 +1,12 @@
 package comp4350.triviasmack.application;
 
+import comp4350.triviasmack.business.FetchQuestions;
 import comp4350.triviasmack.business.ServerAccess;
+
 import comp4350.triviasmack.business.ServerAccessObject;
+
+import comp4350.triviasmack.business.ServerAccessStub;
+
 
 public class Services {
     private static ServerAccess serverAccessService = null;
@@ -16,17 +21,16 @@ public class Services {
 
     public static ServerAccess createServerAccess(ServerAccess alternateServerAccessService) {
         if (serverAccessService == null) {
-            serverAccessService = alternateServerAccessService;
-            serverAccessService.open();
+            if(alternateServerAccessService instanceof ServerAccessStub) {
+                serverAccessService = alternateServerAccessService;
+                serverAccessService.open();
+            }
         }
         return serverAccessService;
     }
 
     public static ServerAccess getServerAccess() {
-        if (serverAccessService == null) {
-            System.out.println("Connection to server access has not been established.");
-            System.exit(1);
-        }
+
         return serverAccessService;
     }
 

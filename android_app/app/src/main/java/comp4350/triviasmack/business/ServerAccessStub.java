@@ -47,6 +47,13 @@ public class ServerAccessStub implements ServerAccess{
         questions.add(new Question("The Balkans are in:", optionsI, 1));
     }
 
+    public void open(ArrayList<Question> q){
+        System.out.println("Opened stub server access");
+
+        for(int i = 0; i < q.size(); i++)
+            questions.add(q.get(i));
+    }
+
     public void close(){
         System.out.println("Closed stub server access");
     }
