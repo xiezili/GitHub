@@ -7,3 +7,4 @@ flask_session/*
 !.elasticbeanstalk/*.global.yml
 
 .idea/*
+android_app/.idea/gradle.xml
