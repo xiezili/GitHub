@@ -51,6 +51,14 @@ public class FetchQuestionTest extends TestCase {
             assertEquals(testArray[i], q.getOptions()[i]);
     }
 
+    public void testSingleton(){
+        System.out.println("Testing GameController: Singleton");
+
+        FetchQuestions first = FetchQuestions.getInstance();
+        FetchQuestions second = FetchQuestions.getInstance();
+        assertEquals(first, second);
+    }
+
     public void testWrongValue(){
 
         System.out.println("Testing FetchQuestion: ErrorHandling");
