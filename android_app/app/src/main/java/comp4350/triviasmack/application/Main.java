@@ -1,9 +1,6 @@
 package comp4350.triviasmack.application;
 
 
-import comp4350.triviasmack.business.ServerAccessDB;
-import comp4350.triviasmack.business.ServerAccessStub;
-
 public class Main {
 
     public static final int numQuestions = 2;
