@@ -28,6 +28,9 @@ public class ServerAccessDB implements ServerAccess{
     }
 
     public ArrayList<Question> getRandomQuestions(int numQuestions){
-        return new ArrayList<Question>(questions.subList(0, numQuestions));
+        if(numQuestions > questions.size())
+            numQuestions = questions.size()-1;
+        //return new ArrayList<Question>(questions.subList(0, 2));
+        return questions;
     }
 }

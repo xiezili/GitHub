@@ -29,12 +29,6 @@ public class MainActivity extends AppCompatActivity {
     public void onStart(){
         System.out.println("dfd");
         super.onStart();
-        updateQuestions();
-    }
-
-    public void updateQuestions(){
-        //FetchQuestions fetch = new FetchQuestions();
-        //fetch.execute();
     }
 
     private void displayScore(){
