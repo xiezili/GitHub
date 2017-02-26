@@ -2,27 +2,28 @@ package comp4350.triviasmack.business;
 
 import java.util.ArrayList;
 
+import comp4350.triviasmack.application.Main;
 import comp4350.triviasmack.application.Services;
 import comp4350.triviasmack.objects.Question;
 
 public class GameController {
 
     private static GameController instance = null;
-    private final static int maxQuestions = 3;
+    private final static int maxQuestions = Main.numQuestions;
 
     private ArrayList<Question> questions;
     private int questionCount;
     private Question currQuestion;
     private int score;
     private boolean started;
-    private ServerAccess serverAccess;
+    private AccessQuestions accessQuestions;
 
     protected GameController(){
         questions = null;
         questionCount = -1;
         currQuestion = null;
         score = -1;
-        serverAccess = Services.getServerAccess();
+        accessQuestions = new AccessQuestions();
     }
 
     public static GameController getInstance() {
@@ -32,16 +33,12 @@ public class GameController {
         return instance;
     }
 
-    private ArrayList<Question> getQuestions(){
-        return serverAccess.getRandomQuestions(maxQuestions);
-    }
-
     public int getScore(){ return score; }
 
     public void start(){
         questionCount = 0;
         score = 0;
-        questions = getQuestions();
+        questions = accessQuestions.getRandomQuestions();
         started = true;
     }
 
@@ -65,6 +62,10 @@ public class GameController {
             result = true;
         }
         return result;
+    }
+
+    public void getQuestions(ArrayList<Question> result){
+        result.addAll(questions);
     }
 
     public void increaseScore(){ score++; }
