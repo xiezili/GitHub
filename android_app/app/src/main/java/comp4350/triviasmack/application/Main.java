@@ -5,6 +5,8 @@ import comp4350.triviasmack.business.ServerAccessStub;
 
 public class Main {
 
+    public static final int numQuestions = 2;
+
     public static void main(String[] args) {
         startUp();
 
@@ -14,7 +16,7 @@ public class Main {
     }
 
     public static void startUp() {
-        Services.createServerAccess(new ServerAccessStub());
+        Services.createServerAccess(numQuestions);
     }
 
     public static void shutDown() {

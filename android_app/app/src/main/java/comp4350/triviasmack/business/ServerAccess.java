@@ -10,5 +10,5 @@ public interface ServerAccess {
 
     void close();
 
-    ArrayList<Question> getRandomQuestions(int numQuestions);
+    ArrayList<Question> getRandomQuestions();
 }

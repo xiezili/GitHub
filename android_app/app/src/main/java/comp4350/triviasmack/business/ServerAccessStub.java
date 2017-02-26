@@ -8,9 +8,12 @@ import comp4350.triviasmack.objects.Question;
 public class ServerAccessStub implements ServerAccess{
 
     private final ArrayList<Question> questions;
+    private int numQuestions;
 
-    public ServerAccessStub() {
-        this.questions = new ArrayList<>();
+    public ServerAccessStub(int numQuestions)
+    {
+        this.numQuestions = numQuestions;
+        questions = new ArrayList<>();
     }
 
     public void open(){
@@ -48,7 +51,7 @@ public class ServerAccessStub implements ServerAccess{
         System.out.println("Closed stub server access");
     }
 
-    public ArrayList<Question> getRandomQuestions(int numQuestions){
+    public ArrayList<Question> getRandomQuestions(){
         return new ArrayList<Question>(questions.subList(0, numQuestions));
     }
 }
