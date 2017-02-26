@@ -9,7 +9,11 @@ import org.json.JSONObject;
 import comp4350.triviasmack.business.FetchQuestions;
 import comp4350.triviasmack.objects.Question;
 
-public class FetchQuestionTests extends TestCase {
+public class FetchQuestionTest extends TestCase {
+
+    public FetchQuestionTest(String arg0) {
+        super(arg0);
+    }
 
     private String str = "{\n" +
             "\t\"question\": What is 2+2?,\n" +
@@ -20,6 +24,7 @@ public class FetchQuestionTests extends TestCase {
             "\t],\n" +
             "\t\"answer\": 2,\n" +
             "}";
+
     private String[] testArray = {"3", "0", "4"};
     private FetchQuestions dummyFetchQuestions;
 
@@ -28,17 +33,13 @@ public class FetchQuestionTests extends TestCase {
         dummyFetchQuestions = FetchQuestions.getInstance();
     }
 
-    public FetchQuestionTests(String arg0) {
-        super(arg0);
-    }
-
     @Override
     protected void tearDown() throws Exception {
         FetchQuestions.destroy();
     }
 
     public void testBasicJSON(){
-        System.out.println("\nTesting FetchQuestion: ParseQuestion");
+        System.out.println("Testing FetchQuestion: ParseQuestion");
         Question q;
 
         q = dummyFetchQuestions.parseQuestion(str);
@@ -48,13 +49,11 @@ public class FetchQuestionTests extends TestCase {
         assertEquals(q.getAnswer(), 2);
         for (int i = 0; i < q.getOptions().length; i++)
             assertEquals(testArray[i], q.getOptions()[i]);
-
-        System.out.println("Finished FetchQuestion: ParseQuestion");
     }
 
     public void testWrongValue(){
 
-        System.out.println("\nTesting FetchQuestion: ErrorHandling");
+        System.out.println("Testing FetchQuestion: ErrorHandling");
 
         boolean fail = true;
 
@@ -74,7 +73,5 @@ public class FetchQuestionTests extends TestCase {
         {
         }
         assertTrue(fail);
-
-        System.out.println("Finished FetchQuestion: ErrorHandling");
     }
 }
