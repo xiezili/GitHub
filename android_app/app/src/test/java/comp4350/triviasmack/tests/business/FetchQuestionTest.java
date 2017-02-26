@@ -9,6 +9,8 @@ import org.json.JSONObject;
 import comp4350.triviasmack.business.FetchQuestions;
 import comp4350.triviasmack.objects.Question;
 
+import static org.junit.Assert.assertArrayEquals;
+
 public class FetchQuestionTest extends TestCase {
 
     public FetchQuestionTest(String arg0) {
@@ -40,15 +42,14 @@ public class FetchQuestionTest extends TestCase {
 
     public void testBasicJSON(){
         System.out.println("Testing FetchQuestion: ParseQuestion");
-        Question q;
+        Question questionObj;
 
-        q = dummyFetchQuestions.parseQuestion(str);
-        assertNotNull(q);
+        questionObj = dummyFetchQuestions.parseQuestion(str);
+        assertNotNull(questionObj);
 
-        assertEquals(q.getQuestion(), "What is 2+2?");
-        assertEquals(q.getAnswer(), 2);
-        for (int i = 0; i < q.getOptions().length; i++)
-            assertEquals(testArray[i], q.getOptions()[i]);
+        assertEquals(questionObj.getQuestion(), "What is 2+2?");
+        assertEquals(questionObj.getAnswer(), 2);
+        assertArrayEquals(testArray, questionObj.getOptions());
     }
 
     public void testSingleton(){
@@ -60,26 +61,23 @@ public class FetchQuestionTest extends TestCase {
     }
 
     public void testWrongValue(){
-
         System.out.println("Testing FetchQuestion: ErrorHandling");
 
-        boolean fail = true;
+        JSONObject jsonObj;
+        JSONArray jsonArray;
 
         try {
-            JSONObject obj = new JSONObject(str);
+            jsonObj = new JSONObject(str);
 
-            JSONArray jsonArray = obj.getJSONArray("options");
+            jsonArray = jsonObj.getJSONArray("options");
             assertNotNull(jsonArray);
 
             for (int i = 0; i < jsonArray.length(); i++)
                 assertEquals(testArray[i], jsonArray.get(i).toString());
 
-            int number = obj.getInt("umber");
-            fail = false;
+            jsonObj.getInt("umber");
+            fail("Expected a NullPointerException");
         }
-        catch(Exception e)
-        {
-        }
-        assertTrue(fail);
+        catch(Exception e) {}
     }
 }

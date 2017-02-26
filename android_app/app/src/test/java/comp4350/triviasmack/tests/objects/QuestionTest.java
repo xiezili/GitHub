@@ -59,6 +59,7 @@ public class QuestionTest extends TestCase {
 
     public void testFailure() {
         System.out.println("Testing Question: Invalid Args");
+
         try{
             new Question(null, null, -1);
             fail("Expected a NullPointerException");
