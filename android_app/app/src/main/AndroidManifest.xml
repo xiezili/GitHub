@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="comp4350.triviasmack">
     <uses-permission android:name="android.permission.INTERNET"/>
+<<<<<<< HEAD
+=======
+
+>>>>>>> fd8d9748c32e495909a4956e7b39e7402633e7cc
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
