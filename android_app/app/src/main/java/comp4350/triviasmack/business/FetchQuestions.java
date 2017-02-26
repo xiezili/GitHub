@@ -17,7 +17,6 @@ import java.util.ArrayList;
 import comp4350.triviasmack.objects.Question;
 
 public class FetchQuestions extends AsyncTask<String, Void, String[]>{
->>>>>>> fd8d9748c32e495909a4956e7b39e7402633e7cc
 
     private static FetchQuestions instance = null;
     private ServerAccess serverAccess;
@@ -31,13 +30,9 @@ public class FetchQuestions extends AsyncTask<String, Void, String[]>{
 
     public static void destroy(){ instance = null; }
 
-<<<<<<< HEAD
     protected ArrayList<Question> doInBackground(ServerAccess... server) {
 
         final String BASE_URL = "http://triviasmack.safjbugccz.us-west-2.elasticbeanstalk.com/api/android/question_data";
-=======
-
->>>>>>> fd8d9748c32e495909a4956e7b39e7402633e7cc
         String jsonQuestion = null;
         HttpURLConnection urlConnection = null;
         BufferedReader reader = null;
