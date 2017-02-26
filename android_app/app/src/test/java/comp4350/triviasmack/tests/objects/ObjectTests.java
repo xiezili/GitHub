@@ -9,8 +9,10 @@ public class ObjectTests {
     public static TestSuite suite;
 
     public static Test suite() {
-        suite = new TestSuite("Business tests");
+        suite = new TestSuite("Object tests");
+
         suite.addTestSuite(QuestionTest.class);
         return suite;
     }
 }
+

@@ -4,6 +4,8 @@ import junit.framework.TestCase;
 
 import comp4350.triviasmack.objects.Question;
 
+import static org.junit.Assert.assertArrayEquals;
+
 public class QuestionTest extends TestCase {
 
     private String question;
@@ -33,7 +35,7 @@ public class QuestionTest extends TestCase {
 
         assertNotNull(questionObj);
         assertEquals(question, questionObj.getQuestion());
-        assertEquals(options, questionObj.getOptions());
+        assertArrayEquals(options, questionObj.getOptions());
         assertEquals(answer, questionObj.getAnswer());
     }
 
@@ -43,6 +45,16 @@ public class QuestionTest extends TestCase {
         assertEquals(answer, questionObj.getAnswer());
         assertEquals(options, questionObj.getOptions());
         assertEquals(question, questionObj.getQuestion());
+    }
+
+    public void testEmptyQuestion() {
+        System.out.println("Testing Question: EmptyQuestion");
+
+        Question q1 = new Question("", new String[0], 0);
+
+        assertEquals(q1.getQuestion(), "");
+        assertEquals(q1.getOptions().length, 0);
+        assertEquals(q1.getAnswer(), 0);
     }
 
     public void testFailure() {
