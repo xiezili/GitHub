@@ -12,11 +12,14 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 
 import comp4350.triviasmack.objects.Question;
 
-public class FetchQuestions extends AsyncTask<String, Void, String[]>{
+public class FetchQuestions extends AsyncTask<ServerAccess, Void, ArrayList<Question>>{
+
     private static FetchQuestions instance = null;
+    private ServerAccess serverAccess;
 
     public static FetchQuestions getInstance() {
         if(instance == null) {
@@ -27,21 +30,22 @@ public class FetchQuestions extends AsyncTask<String, Void, String[]>{
 
     public static void destroy(){ instance = null; }
 
-    protected String[] doInBackground(String... params) {
+    protected ArrayList<Question> doInBackground(ServerAccess... server) {
 
-        final String BASE_URL = "triviasmack.safjbugccz.us-west-2.elasticbeanstalk.com/api/android/question_data";
+        final String BASE_URL = "http://triviasmack.safjbugccz.us-west-2.elasticbeanstalk.com/api/android/question_data";
         String jsonQuestion = null;
         HttpURLConnection urlConnection = null;
         BufferedReader reader = null;
-        String[] questions;
+        ArrayList<Question> questions = null;
+        serverAccess = server[0];
 
         try {
             URL url = new URL(BASE_URL);
-
             //create request to flask
             urlConnection = (HttpURLConnection) url.openConnection();
             urlConnection.setRequestMethod("GET");
             urlConnection.connect();
+
             //create input stream for json string
             InputStream inputStream = urlConnection.getInputStream();
             StringBuffer buffer = new StringBuffer();
@@ -58,9 +62,10 @@ public class FetchQuestions extends AsyncTask<String, Void, String[]>{
             jsonQuestion = buffer.toString();
             Log.v("Testing output", jsonQuestion);
 
-
+            questions = parseQuestion(jsonQuestion);
 
         } catch (Exception e) {
+            e.printStackTrace();
             System.out.println("Exception");
 
         } finally {
@@ -75,36 +80,42 @@ public class FetchQuestions extends AsyncTask<String, Void, String[]>{
                 }
             }
         }
-
-        return null;
+        return questions;
     }
 
-    protected void onPostExecute(String[] strings) {
-        super.onPostExecute(strings);
-
+    protected void onPostExecute(ArrayList<Question> q) {
+        super.onPostExecute(q);
+        serverAccess.open(q);
     }
 
-    public Question parseQuestion(String jsonQuestion)
+    public ArrayList<Question> parseQuestion(String jsonQuestion)
     {
-        Question q = null;
-        JSONObject jsonObject = null;
+        ArrayList<Question> q = null;
+        JSONObject jsonObject = null, fullJSONObject;
+        JSONArray array, results;
         String question = "";
         String[] options;
         int answer;
 
         try {
-            jsonObject = new JSONObject(jsonQuestion);
+            fullJSONObject = new JSONObject(jsonQuestion);
+            results = fullJSONObject.getJSONArray("result");
+            q = new ArrayList<Question>();
 
-            question = jsonObject.getString("question");
+            for(int i = 0; i < results.length(); i++) {
+                jsonObject = results.getJSONObject(i);
 
-            JSONArray array = jsonObject.getJSONArray("options");
-            options = new String[array.length()];
-            for(int i = 0; i < options.length; i++)
-                options[i] = array.get(i).toString();
+                question = jsonObject.getString("question");
 
-            answer = jsonObject.getInt("answer");
+                array = jsonObject.getJSONArray("options");
+                options = new String[array.length()];
+                for (int j = 0; j < options.length; j++)
+                    options[j] = array.get(j).toString();
 
-            q = new Question(question, options, answer);
+                answer = jsonObject.getInt("answer");
+
+                q.add(new Question(question, options, answer));
+            }
         }
         catch(Exception e) {
             e.printStackTrace();

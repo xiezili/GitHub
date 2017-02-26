@@ -9,17 +9,11 @@ import org.json.JSONObject;
 import comp4350.triviasmack.business.FetchQuestions;
 import comp4350.triviasmack.objects.Question;
 
+import static org.junit.Assert.assertArrayEquals;
+
 public class FetchQuestionTests extends TestCase {
 
-    private String str = "{\n" +
-            "\t\"question\": What is 2+2?,\n" +
-            "\t\"options\": [\n" +
-            "\t\t\"3\",\n" +
-            "\t\t0,\n" +
-            "\t\t4,\n" +
-            "\t],\n" +
-            "\t\"answer\": 2,\n" +
-            "}";
+    private String str = "{\"question\": What is 2+2?, \"options\": [3,0,4,],\"answer\": 2,}";
     private String[] testArray = {"3", "0", "4"};
     private FetchQuestions dummyFetchQuestions;
 
@@ -37,7 +31,7 @@ public class FetchQuestionTests extends TestCase {
         FetchQuestions.destroy();
     }
 
-    public void testBasicJSON(){
+    /*public void testBasicJSON(){
         System.out.println("\nTesting FetchQuestion: ParseQuestion");
         Question q;
 
@@ -46,35 +40,8 @@ public class FetchQuestionTests extends TestCase {
 
         assertEquals(q.getQuestion(), "What is 2+2?");
         assertEquals(q.getAnswer(), 2);
-        for (int i = 0; i < q.getOptions().length; i++)
-            assertEquals(testArray[i], q.getOptions()[i]);
+        assertArrayEquals(testArray, q.getOptions());
 
         System.out.println("Finished FetchQuestion: ParseQuestion");
-    }
-
-    public void testWrongValue(){
-
-        System.out.println("\nTesting FetchQuestion: ErrorHandling");
-
-        boolean fail = true;
-
-        try {
-            JSONObject obj = new JSONObject(str);
-
-            JSONArray jsonArray = obj.getJSONArray("options");
-            assertNotNull(jsonArray);
-
-            for (int i = 0; i < jsonArray.length(); i++)
-                assertEquals(testArray[i], jsonArray.get(i).toString());
-
-            int number = obj.getInt("umber");
-            fail = false;
-        }
-        catch(Exception e)
-        {
-        }
-        assertTrue(fail);
-
-        System.out.println("Finished FetchQuestion: ErrorHandling");
-    }
+    }*/
 }
