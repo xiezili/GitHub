@@ -13,4 +13,8 @@ To run the server:
 - `clone https://github.com/samuel-peers/Trivia-Game.git`
 - `cd Trivia-Game`
 - `eb init -p python2.7 trivia_app`
-- `eb create trivia_env`
+- `eb create trivia-env`
+
+To run unit tests:
+- In the terminal, go to the root directory of the project (Trivia-Game) and run: 
+`python -m web_app.run_unit_tests`
