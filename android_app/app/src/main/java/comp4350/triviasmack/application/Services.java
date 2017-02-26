@@ -1,6 +1,5 @@
 package comp4350.triviasmack.application;
 
-import comp4350.triviasmack.business.FetchQuestions;
 import comp4350.triviasmack.business.ServerAccess;
 
 import comp4350.triviasmack.business.ServerAccessObject;
