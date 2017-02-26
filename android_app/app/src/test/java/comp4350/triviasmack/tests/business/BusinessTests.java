@@ -9,7 +9,7 @@ public class BusinessTests {
     public static Test suite() {
         suite = new TestSuite("Business tests");
         suite.addTestSuite(GameControllerTest.class);
-        suite.addTestSuite(FetchQuestionTest.class);
+        //suite.addTestSuite(FetchQuestionTest.class);
         return suite;
     }
 }

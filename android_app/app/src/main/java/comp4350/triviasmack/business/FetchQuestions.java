@@ -16,7 +16,7 @@ import java.util.ArrayList;
 
 import comp4350.triviasmack.objects.Question;
 
-public class FetchQuestions extends AsyncTask<String, Void, String[]>{
+public class FetchQuestions extends AsyncTask<ServerAccess, Void, ArrayList<Question>>{
 
     private static FetchQuestions instance = null;
     private ServerAccess serverAccess;

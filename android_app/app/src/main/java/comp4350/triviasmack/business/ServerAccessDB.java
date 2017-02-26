@@ -27,7 +27,7 @@ public class ServerAccessDB implements ServerAccess{
         System.out.println("Closed server access");
     }
 
-    public ArrayList<Question> getRandomQuestions(){
-        return questions;
+    public ArrayList<Question> getRandomQuestions(int numQuestions){
+        return new ArrayList<Question>(questions.subList(0, numQuestions));
     }
 }

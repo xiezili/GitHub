@@ -33,8 +33,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void updateQuestions(){
-        FetchQuestions fetch = new FetchQuestions();
-        fetch.execute();
+        //FetchQuestions fetch = new FetchQuestions();
+        //fetch.execute();
     }
 
     private void displayScore(){
