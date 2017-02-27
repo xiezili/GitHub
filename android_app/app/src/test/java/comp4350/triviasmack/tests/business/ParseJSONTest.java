@@ -10,7 +10,6 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import comp4350.triviasmack.business.ParseJSON;
-import comp4350.triviasmack.business.ServerAccessObject;
 import comp4350.triviasmack.objects.Question;
 
 import static org.junit.Assert.assertArrayEquals;
@@ -28,24 +27,12 @@ public class ParseJSONTest extends TestCase {
 
         try {
             JSONObject json = new JSONObject();
-            JSONObject newJSON = new JSONObject();
-
             JSONArray result = new JSONArray();
-            JSONArray options = new JSONArray();
 
-            options.put("South America");
-            options.put("Europe");
-            options.put("Australia");
-            options.put("Asia");
+            result.put(buildJSONObject());
+            json.put("result", result);
 
-            json.put("answer", new Integer(1));
-            json.put("options", options);
-            json.put("question", "The Balkans are in:");
-
-            result.put(json);
-            newJSON.put("result", result);
-
-            q = ParseJSON.parseJSONquestions(newJSON);
+            q = ParseJSON.parseJSONquestions(json);
 
             assertNotNull(q);
             assertEquals(1, q.size());
@@ -81,5 +68,61 @@ public class ParseJSONTest extends TestCase {
         }
     }
 
+    public void testLargeJSONArray(){
+        System.out.println("Testing ParseJSONObject: Parse Large JSON Object");
+        ArrayList<Question> q;
+        final int MAX_ARRAY_SIZE = 100;
 
+        try {
+            JSONObject json = new JSONObject();
+            JSONArray result = new JSONArray();
+
+            for(int i = 0; i < MAX_ARRAY_SIZE; i++)
+                result.put(buildJSONObject());
+            json.put("result", result);
+
+            q = ParseJSON.parseJSONquestions(json);
+
+            assertNotNull(q);
+            assertEquals(MAX_ARRAY_SIZE, q.size());
+
+            for(int i = 0; i < MAX_ARRAY_SIZE; i++) {
+                assertEquals("The Balkans are in:", q.get(i).getQuestion());
+
+                assertEquals("South America", q.get(i).getOptions()[0]);
+                assertEquals("Europe", q.get(i).getOptions()[1]);
+                assertEquals("Australia", q.get(i).getOptions()[2]);
+                assertEquals("Asia", q.get(i).getOptions()[3]);
+
+                assertEquals(1, q.get(i).getAnswer());
+            }
+        }
+        catch(JSONException e){
+            e.printStackTrace();
+        }
+    }
+
+    private JSONObject buildJSONObject(){
+
+        JSONObject json;
+
+        try {
+            json = new JSONObject();
+            JSONArray options = new JSONArray();
+
+            options.put("South America");
+            options.put("Europe");
+            options.put("Australia");
+            options.put("Asia");
+
+            json.put("answer", new Integer(1));
+            json.put("options", options);
+            json.put("question", "The Balkans are in:");
+        }
+        catch(JSONException e){
+            e.printStackTrace();
+            json = null;
+        }
+        return json;
+    }
 }
