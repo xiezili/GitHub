@@ -4,8 +4,6 @@ import comp4350.triviasmack.business.ServerAccess;
 
 import comp4350.triviasmack.business.ServerAccessObject;
 
-import comp4350.triviasmack.business.ServerAccessStub;
-
 
 public class Services {
     private static ServerAccess serverAccessService = null;
@@ -20,10 +18,8 @@ public class Services {
 
     public static ServerAccess createServerAccess(ServerAccess alternateServerAccessService) {
         if (serverAccessService == null) {
-            if(alternateServerAccessService instanceof ServerAccessStub) {
-                serverAccessService = alternateServerAccessService;
-                serverAccessService.open();
-            }
+            serverAccessService = alternateServerAccessService;
+            serverAccessService.open();
         }
         return serverAccessService;
     }
