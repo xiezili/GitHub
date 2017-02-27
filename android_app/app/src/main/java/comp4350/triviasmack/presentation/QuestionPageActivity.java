@@ -2,6 +2,7 @@ package comp4350.triviasmack.presentation;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -43,16 +44,20 @@ public class QuestionPageActivity extends AppCompatActivity {
         boolean result;
         String optionText;
 
+        v.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.nice_green));
+
         optionText = ((Button)v).getText()+"";
         optionText = optionText.substring(2);
         result = gameController.evaluateAnswer(optionText);
 
         if (result) {
             ((Button) v).setText("• RIGHT!");
+            v.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.nice_green));
             gameController.increaseScore();
         }
         else{
             ((Button) v).setText("• WRONG!");
+            v.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.nice_red));
         }
 
         if (gameController.finished()){
