@@ -23,8 +23,6 @@ public class ServerAccessObjectTest extends TestCase {
         serverAccessObject = new ServerAccessObject(0);
     }
 
-    //private
-
     public void testParseQuestion(){
 
         System.out.println("Testing ServerAccessObject: ParseQuestion");
