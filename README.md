@@ -15,7 +15,7 @@ To run the server:
 - `eb init -p python2.7 trivia_app`
 - `eb create trivia-env`
 
-You MUST be in the US West (Oregon) region for the custom AMI to work.
+You MUST be in the US West (Oregon) region or Canada (Central) for the custom AMI to work.
 
 To run the android app:
 - `clone https://github.com/samuel-peers/Trivia-Game.git` (if you haven't already)
