@@ -37,11 +37,11 @@ public class ServerAccessObject implements ServerAccess {
         catch (java.lang.InterruptedException e){}
         catch (java.util.concurrent.ExecutionException e){}
 
-        questions.addAll(parseQuestions(result));
+        questions.addAll(parseJSONObject(result));
     }
 
 
-    public ArrayList<Question> parseQuestions(JSONObject jsonResult)
+    public ArrayList<Question> parseJSONObject(JSONObject jsonResult)
     {
         Question questionObj;
         JSONObject jsonQuestionObject;
@@ -77,7 +77,8 @@ public class ServerAccessObject implements ServerAccess {
             }
         }
         catch(Exception e) {
-            e.printStackTrace();
+            questions = null;
+            //e.printStackTrace();
         }
 
         return questions;
