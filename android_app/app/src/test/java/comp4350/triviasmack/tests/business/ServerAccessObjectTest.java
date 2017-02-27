@@ -68,5 +68,22 @@ public class ServerAccessObjectTest extends TestCase {
         }
     }
 
+    public void testBadFormat(){
+
+        System.out.println("Testing ServerAccessObject: Bad Formatting");
+        ArrayList<Question> q;
+        JSONObject json = new JSONObject();
+
+        try {
+            json.put("Bad", "NULL");
+            json.put(" Still Bad", "NULL");
+            q = serverAccessObject.parseQuestions(json);
+            assertNull(q);
+        }
+        catch(JSONException e){
+            e.printStackTrace();
+        }
+    }
+
 
 }

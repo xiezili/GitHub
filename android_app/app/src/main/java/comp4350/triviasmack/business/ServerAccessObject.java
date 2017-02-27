@@ -77,7 +77,8 @@ public class ServerAccessObject implements ServerAccess {
             }
         }
         catch(Exception e) {
-            e.printStackTrace();
+            questions = null;
+            //e.printStackTrace();
         }
 
         return questions;
