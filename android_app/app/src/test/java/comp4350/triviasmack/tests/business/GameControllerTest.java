@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import comp4350.triviasmack.application.Main;
 import comp4350.triviasmack.application.Services;
 import comp4350.triviasmack.business.GameController;
-import comp4350.triviasmack.business.ServerAccessStub;
 import comp4350.triviasmack.objects.Question;
 
 public class GameControllerTest extends TestCase {
