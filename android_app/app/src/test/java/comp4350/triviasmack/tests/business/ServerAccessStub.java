@@ -1,11 +1,11 @@
-package comp4350.triviasmack.business;
+package comp4350.triviasmack.tests.business;
 
 import java.util.ArrayList;
-import java.util.List;
 
+import comp4350.triviasmack.business.ServerAccess;
 import comp4350.triviasmack.objects.Question;
 
-public class ServerAccessStub implements ServerAccess{
+public class ServerAccessStub implements ServerAccess {
 
     private final ArrayList<Question> questions;
     private int numQuestions;
