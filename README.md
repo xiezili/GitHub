@@ -23,3 +23,5 @@ To run the android app:
 To run server unit tests:
 - In the terminal, go to the root directory of the project (Trivia-Game) and run: 
 `python -m web_app.run_unit_tests`
+
+Take a look at the wiki to see where to find what.
