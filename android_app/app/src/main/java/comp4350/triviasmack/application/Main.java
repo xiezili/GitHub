@@ -3,7 +3,7 @@ package comp4350.triviasmack.application;
 
 public class Main {
 
-    public static final int numQuestions = 2;
+    public static final int numQuestions = 3;
 
     public static void main(String[] args) {
         startUp();

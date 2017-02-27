@@ -49,16 +49,13 @@ public class ServerAccessStub implements ServerAccess{
 
     public void open(ArrayList<Question> q){
         System.out.println("Opened stub server access");
-
-        for(int i = 0; i < q.size(); i++)
-            questions.add(q.get(i));
     }
 
     public void close(){
         System.out.println("Closed stub server access");
     }
 
-    public ArrayList<Question> getRandomQuestions(){
-        return new ArrayList<Question>(questions.subList(0, numQuestions));
+    public void getRandomQuestions(ArrayList<Question> questions){
+        questions.addAll(this.questions.subList(0, numQuestions));
     }
 }

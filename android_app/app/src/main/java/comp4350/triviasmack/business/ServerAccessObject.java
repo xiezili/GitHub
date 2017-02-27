@@ -3,7 +3,6 @@ package comp4350.triviasmack.business;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
 import java.net.URL;
 import java.util.ArrayList;
 
@@ -12,7 +11,6 @@ import comp4350.triviasmack.objects.Question;
 public class ServerAccessObject implements ServerAccess {
 
     private URL baseUrl;
-    private BufferedReader serverReader;
 
     public ServerAccessObject(int numQuestions){
         try {
@@ -27,7 +25,7 @@ public class ServerAccessObject implements ServerAccess {
 
     public void close(){}
 
-    public ArrayList<Question> getRandomQuestions(){
+    public void getRandomQuestions(ArrayList<Question> questions){
         JSONObject result = null;
         BackgroundTask serverTask;
 
@@ -39,7 +37,7 @@ public class ServerAccessObject implements ServerAccess {
         catch (java.lang.InterruptedException e){}
         catch (java.util.concurrent.ExecutionException e){}
 
-        return parseQuestions(result);
+        questions.addAll(parseQuestions(result));
     }
 
 

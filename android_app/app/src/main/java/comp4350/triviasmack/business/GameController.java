@@ -38,7 +38,8 @@ public class GameController {
     public void start(){
         questionCount = 0;
         score = 0;
-        questions = accessQuestions.getRandomQuestions();
+        questions = new ArrayList<Question>();
+        accessQuestions.getRandomQuestions(questions);
         started = true;
     }
 

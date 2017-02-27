@@ -13,7 +13,7 @@ public class AccessQuestions {
         serverAccess = Services.getServerAccess();
     }
 
-    public ArrayList<Question> getRandomQuestions(){
-        return serverAccess.getRandomQuestions();
+    public void getRandomQuestions(ArrayList<Question> questions){
+        serverAccess.getRandomQuestions(questions);
     }
 }
