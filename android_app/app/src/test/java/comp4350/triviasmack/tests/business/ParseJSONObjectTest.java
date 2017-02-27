@@ -14,20 +14,20 @@ import comp4350.triviasmack.objects.Question;
 
 import static org.junit.Assert.assertArrayEquals;
 
-public class ServerAccessObjectTest extends TestCase {
+public class ParseJSONObjectTest extends TestCase {
 
     private ServerAccessObject serverAccessObject;
 
-    public ServerAccessObjectTest(String arg0) {
+    public ParseJSONObjectTest(String arg0) {
         super(arg0);
         serverAccessObject = new ServerAccessObject(0);
     }
 
     //private
 
-    public void testParseQuestion(){
+    public void testParseJSON(){
 
-        System.out.println("Testing ServerAccessObject: ParseQuestion");
+        System.out.println("Testing ParseQuestion: Parse Basic JSON Object");
         ArrayList<Question> q;
 
         try {
@@ -49,7 +49,7 @@ public class ServerAccessObjectTest extends TestCase {
             result.put(json);
             newJSON.put("result", result);
 
-            q = serverAccessObject.parseQuestions(newJSON);
+            q = serverAccessObject.parseJSONObject(newJSON);
 
             assertNotNull(q);
             assertEquals(1, q.size());
@@ -70,14 +70,14 @@ public class ServerAccessObjectTest extends TestCase {
 
     public void testBadFormat(){
 
-        System.out.println("Testing ServerAccessObject: Bad Formatting");
+        System.out.println("Testing ServerAccessObject: Bad Formated JSON");
         ArrayList<Question> q;
         JSONObject json = new JSONObject();
 
         try {
             json.put("Bad", "NULL");
             json.put(" Still Bad", "NULL");
-            q = serverAccessObject.parseQuestions(json);
+            q = serverAccessObject.parseJSONObject(json);
             assertNull(q);
         }
         catch(JSONException e){
