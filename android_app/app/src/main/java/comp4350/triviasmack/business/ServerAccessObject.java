@@ -41,7 +41,7 @@ public class ServerAccessObject implements ServerAccess {
     }
 
 
-    private ArrayList<Question> parseQuestions(JSONObject jsonResult)
+    public ArrayList<Question> parseQuestions(JSONObject jsonResult)
     {
         Question questionObj;
         JSONObject jsonQuestionObject;
