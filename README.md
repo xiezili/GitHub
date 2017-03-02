@@ -11,7 +11,7 @@ Requirements: eb CLI (`pip install awsebcli`)
 
 To run the server:
 - `clone https://github.com/samuel-peers/Trivia-Game.git`
-- `cd Trivia-Game`
+- `cd Trivia-Smack`
 - `eb init -p python2.7 trivia_app`
 - `eb create trivia-env`
 
@@ -19,7 +19,7 @@ You MUST be in the US West (Oregon) region or Canada (Central) for the custom AM
 
 To run the android app:
 - `clone https://github.com/samuel-peers/Trivia-Game.git` (if you haven't already)
-- `cd Trivia-Game`
+- `cd Trivia-Smack`
 - Open Android Studio and open the project `android_app`
 
 To run server unit tests:
