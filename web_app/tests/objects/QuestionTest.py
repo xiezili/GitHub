@@ -31,6 +31,7 @@ class QuestionTest(unittest.TestCase):
         options = ["grizzly", "black", "polar"]
         answer = 1
 
+        self.fail("failure!")
         self.question_obj.question = question
         self.question_obj.options = options
         self.question_obj.answer = answer
