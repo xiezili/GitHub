@@ -2,6 +2,7 @@
 run_unit_tests.py
 """
 import unittest
+import sys
 from web_app.tests.objects.QuestionTest import QuestionTest
 from web_app.tests.persistence.DataAccessTest import DataAccessTest
 from web_app.tests.business.GameControllerTest import GameControllerTest
@@ -29,4 +30,6 @@ def main():
     runner.run(all_suites)
 
 if __name__ == "__main__":
-    main()
+    sys.exit(1)
+    #main()
+
