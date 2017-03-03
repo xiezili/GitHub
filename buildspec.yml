@@ -6,12 +6,6 @@ phases:
       - apt-get update -y
       - pip install --upgrade pip
       - pip install -r requirements.txt
-  pre_build:
-    commands:
-      - python -m web_app.run_unit_tests
   build:
     commands:
-      - echo Build started on `date`
-  post_build:
-    commands:
-      - echo Build completed on `date`
+      - python -m web_app.run_unit_tests
