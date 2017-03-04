@@ -27,12 +27,9 @@ def main():
         question_access_suite])
 
     runner = unittest.TextTestRunner()
-    result = runner.run(all_suites)
-
-    if result.failures:
-        sys.exit(1)
+    runner.run(all_suites)
 
 if __name__ == "__main__":
-    main()
-    sys.exit(0)
+    sys.exit(1)
+    #main()
 
